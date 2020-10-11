@@ -1,7 +1,8 @@
 String projectFile = "pom.xml"
+def dockerImage
 
 pipeline {
-def app
+
     agent any
 	
 	tools {
@@ -29,7 +30,7 @@ def app
             }			      
             steps {
                 echo 'Deploying....'
-		app = docker.build("rameshpi/spring-boot-data-H2-embedded")
+		dockerImage = docker.build("rameshpi/spring-boot-data-H2-embedded")
             }
         }
 	
