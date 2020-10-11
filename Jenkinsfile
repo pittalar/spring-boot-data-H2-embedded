@@ -12,7 +12,7 @@ pipeline {
             steps {
                 echo 'Building..'
 		    withMaven(maven : 'Maven 3.6.3')	{
-		    	bat 'mvn clean build'
+		    	bat 'mvn clean install'
 		    }
             }
         }
