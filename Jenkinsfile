@@ -1,6 +1,7 @@
 String projectFile = "pom.xml"
 
 pipeline {
+def app
     agent any
 	
 	tools {
@@ -28,14 +29,7 @@ pipeline {
             }			      
             steps {
                 echo 'Deploying....'
-		    dockerBuildAndPublish {
-			    repositoryName('rameshpi/spring-boot-data-H2-embedded')
-			    tag('${BUILD_TIMESTAMP}-${GIT_REVISION,length=7}')
-			    registryCredentials('7e899a8d-def3-486b-ab4f-7f0a62d76d05')
-			    forcePull(false)
-			    createFingerprints(false)
-			    skipDecorate()
-			}
+		app = docker.build("rameshpi/spring-boot-data-H2-embedded")
             }
         }
 	
