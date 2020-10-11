@@ -25,12 +25,12 @@ pipeline {
         }
 
         stage('Docker Image') {
+	agent { dockerfile true }
 	      when {
                 anyOf { branch 'master'; }
             }			      
             steps {
                 echo 'Deploying....'
-		dockerImage = docker.build("rameshpi/spring-boot-data-H2-embedded")
             }
         }
 	
