@@ -22,30 +22,23 @@ pipeline {
             }
         }
 
-        stage('Test Deploy') {
+        stage('Docker Image') {
 	      when {
-                anyOf { branch 'devlop'; }
+                anyOf { branch 'master'; }
             }			      
             steps {
                 echo 'Deploying....'
+		    dockerBuildAndPublish {
+			    repositoryName('rameshpi/spring-boot-data-H2-embedded')
+			    tag('${BUILD_TIMESTAMP}-${GIT_REVISION,length=7}')
+			    registryCredentials('7e899a8d-def3-486b-ab4f-7f0a62d76d05')
+			    forcePull(false)
+			    createFingerprints(false)
+			    skipDecorate()
+			}
             }
         }
-	stage('Stag Deploy') {
-	when {
-		      anyOf { branch 'release'; }
-       }
-
-            steps {
-                echo 'Deploying....'
-            }
-        }
-	stage('Prod Deploy') {
-	when {
-                anyOf { branch 'master'; }
-            }
-            steps {
-                echo 'Deploying....'
-            }
-        }
+	
+	
     }
 }
