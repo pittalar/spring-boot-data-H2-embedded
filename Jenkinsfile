@@ -32,7 +32,7 @@ pipeline {
             steps {
                 echo 'Deploying....'
 		    script{
-			    docker.withRegistry('https://registry.example.com','7e899a8d-def3-486b-ab4f-7f0a62d76d05') {
+			    docker.withRegistry('https://registry.hub.docker.com','7e899a8d-def3-486b-ab4f-7f0a62d76d05') {
 			    
 			    def customImage = docker.build("rameshpi/spring-boot-data-h2-embedded")
 			    /* Push the container to the custom Registry */
